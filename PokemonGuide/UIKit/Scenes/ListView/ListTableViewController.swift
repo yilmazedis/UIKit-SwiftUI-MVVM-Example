@@ -12,7 +12,7 @@ final class ListTableViewController: UIViewController {
     
     var viewModel: ListTableViewModelView!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     private var cancellables = Set<AnyCancellable>()
 
@@ -25,8 +25,6 @@ final class ListTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
-        
-        print(viewModel.title)
         
         items.append(PokemonItem(id: 1,
                                  name: "Bulbasaur",

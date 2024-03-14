@@ -8,10 +8,10 @@
 import UIKit
 import SwiftUI
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
-    @IBOutlet weak var uiKitButton: UIButton!
-    @IBOutlet weak var swiftUIButton: UIButton!
+    @IBOutlet private weak var uiKitButton: UIButton!
+    @IBOutlet private weak var swiftUIButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +42,11 @@ class MainViewController: UIViewController {
         swiftUIButton.layer.cornerRadius = 5
     }
     
-    @IBAction func uikitButtonAction(_ sender: Any) {
+    @IBAction private func uikitButtonAction(_ sender: Any) {
         ListTableViewCoordinator(navigator: navigationController).start()
     }
 
-    @IBAction func swiftUIButtonAction(_ sender: Any) {
+    @IBAction private func swiftUIButtonAction(_ sender: Any) {
         let httpTask = HTTPTask()
         let vm = PokemonListViewModel(httpTask: httpTask)
         let vc = UIHostingController(rootView: PokemonList(viewModel: vm))

@@ -11,8 +11,8 @@ final class ListDetailViewController: UIViewController {
     
     var viewModel: ListDetailViewModel!
     
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet private weak var posterImageView: UIImageView!
+    @IBOutlet private weak var detailLabel: UILabel!
     
     var item: PokemonItem!
         

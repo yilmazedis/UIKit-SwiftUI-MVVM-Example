@@ -32,8 +32,8 @@ final class PokemonListViewModel: ObservableObject {
 
 struct PokemonList: View {
     
-    @StateObject var viewModel: PokemonListViewModel
-    @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel: PokemonListViewModel
+    @Environment(\.dismiss) private var dismiss
     
     init(viewModel: PokemonListViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)

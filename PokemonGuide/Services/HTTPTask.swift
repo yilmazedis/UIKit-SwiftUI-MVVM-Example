@@ -11,6 +11,7 @@ import Combine
 protocol HTTPTaskProtocol {
     func downloadWithAsync(url: URL) async throws -> [PokemonItem]
     func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error>
+    func downloadWithEscaping(url: URL, completionHandler: @escaping (_ items: [PokemonItem]?, _ error: Error?) -> ())
 }
 
 final class HTTPTask: HTTPTaskProtocol {

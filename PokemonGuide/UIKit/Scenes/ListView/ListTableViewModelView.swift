@@ -11,9 +11,7 @@ import Combine
 final class ListTableViewModelView {
     
     var coordinator: ListTableViewCoordinator!
-    
-    let title = "a12e3123e12e4"
-    
+
     private let httpTask: HTTPTaskProtocol
     
     init(httpTask: HTTPTaskProtocol) {
