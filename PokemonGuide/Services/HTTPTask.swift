@@ -9,8 +9,6 @@ import UIKit
 import Combine
 
 class HTTPTask {
-    static let shared = HTTPTask()
-    
     private func handleResponse(data: Data?, response: URLResponse?) throws -> [PokemonItem] {
         guard let data = data,
               let response = response as? HTTPURLResponse,
@@ -39,14 +37,14 @@ class HTTPTask {
         .resume()
     }
     
-    func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem]?, Error> {
+    func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error> {
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap(handleResponse)
             .mapError({ $0 })
             .eraseToAnyPublisher()
     }
     
-    func downloadWithAsync(url: URL) async throws -> [PokemonItem]? {
+    func downloadWithAsync(url: URL) async throws -> [PokemonItem] {
         do {
             let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
             return try handleResponse(data: data, response: response)
