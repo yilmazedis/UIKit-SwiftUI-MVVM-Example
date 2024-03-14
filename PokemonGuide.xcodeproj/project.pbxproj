@@ -25,15 +25,16 @@
 		01307F682BA3730A003E9A47 /* ListDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01307F672BA3730A003E9A47 /* ListDetailCoordinator.swift */; };
 		01307F6B2BA3738D003E9A47 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01307F692BA3738D003E9A47 /* ListDetailViewController.swift */; };
 		01307F6C2BA3738D003E9A47 /* ListDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01307F6A2BA3738D003E9A47 /* ListDetailViewController.xib */; };
+		01307F6F2BA389EA003E9A47 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01307F6D2BA389EA003E9A47 /* MainViewController.swift */; };
+		01307F702BA389EA003E9A47 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01307F6E2BA389EA003E9A47 /* MainViewController.xib */; };
+		01307F722BA38BDF003E9A47 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01307F712BA38BDF003E9A47 /* UIViewController+Ext.swift */; };
 		01B5BECF2BA1F9A2007DC687 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BECE2BA1F9A2007DC687 /* AppDelegate.swift */; };
 		01B5BED12BA1F9A2007DC687 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BED02BA1F9A2007DC687 /* SceneDelegate.swift */; };
-		01B5BED32BA1F9A2007DC687 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BED22BA1F9A2007DC687 /* MainViewController.swift */; };
 		01B5BED82BA1F9A5007DC687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B5BED72BA1F9A5007DC687 /* Assets.xcassets */; };
 		01B5BEDB2BA1F9A5007DC687 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B5BED92BA1F9A5007DC687 /* LaunchScreen.storyboard */; };
 		01B5BEE62BA1F9A5007DC687 /* PokemonGuideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEE52BA1F9A5007DC687 /* PokemonGuideTests.swift */; };
 		01B5BEF02BA1F9A5007DC687 /* PokemonGuideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEEF2BA1F9A5007DC687 /* PokemonGuideUITests.swift */; };
 		01B5BEF22BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEF12BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift */; };
-		01B5BF002BA1FC56007DC687 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B5BEFF2BA1FC56007DC687 /* MainView.xib */; };
 		01B5BF042BA1FFC5007DC687 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BF032BA1FFC5007DC687 /* NibLoadable.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,10 +74,12 @@
 		01307F672BA3730A003E9A47 /* ListDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailCoordinator.swift; sourceTree = "<group>"; };
 		01307F692BA3738D003E9A47 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		01307F6A2BA3738D003E9A47 /* ListDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListDetailViewController.xib; sourceTree = "<group>"; };
+		01307F6D2BA389EA003E9A47 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		01307F6E2BA389EA003E9A47 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		01307F712BA38BDF003E9A47 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		01B5BECB2BA1F9A2007DC687 /* PokemonGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B5BECE2BA1F9A2007DC687 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01B5BED02BA1F9A2007DC687 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		01B5BED22BA1F9A2007DC687 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		01B5BED72BA1F9A5007DC687 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B5BEDA2BA1F9A5007DC687 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B5BEDC2BA1F9A5007DC687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,7 +88,6 @@
 		01B5BEEB2BA1F9A5007DC687 /* PokemonGuideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonGuideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B5BEEF2BA1F9A5007DC687 /* PokemonGuideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGuideUITests.swift; sourceTree = "<group>"; };
 		01B5BEF12BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGuideUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		01B5BEFF2BA1FC56007DC687 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		01B5BF032BA1FFC5007DC687 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				01307F472BA22495003E9A47 /* UIImageView+Ext.swift */,
+				01307F712BA38BDF003E9A47 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,10 +270,10 @@
 				01307F352BA215F0003E9A47 /* Models */,
 				01307F282BA20D48003E9A47 /* SwiftUI */,
 				01307F272BA20D31003E9A47 /* UIKit */,
-				01B5BECE2BA1F9A2007DC687 /* AppDelegate.swift */,
-				01B5BED02BA1F9A2007DC687 /* SceneDelegate.swift */,
 				01B5BF012BA1FFAF007DC687 /* BaseProtocols */,
 				01B5BEFE2BA1FC09007DC687 /* Scenes */,
+				01B5BECE2BA1F9A2007DC687 /* AppDelegate.swift */,
+				01B5BED02BA1F9A2007DC687 /* SceneDelegate.swift */,
 				01B5BED72BA1F9A5007DC687 /* Assets.xcassets */,
 				01B5BED92BA1F9A5007DC687 /* LaunchScreen.storyboard */,
 				01B5BEDC2BA1F9A5007DC687 /* Info.plist */,
@@ -298,8 +301,8 @@
 		01B5BEFE2BA1FC09007DC687 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				01B5BEFF2BA1FC56007DC687 /* MainView.xib */,
-				01B5BED22BA1F9A2007DC687 /* MainViewController.swift */,
+				01307F6E2BA389EA003E9A47 /* MainViewController.xib */,
+				01307F6D2BA389EA003E9A47 /* MainViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -418,9 +421,9 @@
 			files = (
 				01307F432BA21E98003E9A47 /* ListViewCell.xib in Resources */,
 				01307F6C2BA3738D003E9A47 /* ListDetailViewController.xib in Resources */,
-				01B5BF002BA1FC56007DC687 /* MainView.xib in Resources */,
 				01B5BEDB2BA1F9A5007DC687 /* LaunchScreen.storyboard in Resources */,
 				01B5BED82BA1F9A5007DC687 /* Assets.xcassets in Resources */,
+				01307F702BA389EA003E9A47 /* MainViewController.xib in Resources */,
 				01307F642BA36DCE003E9A47 /* ListTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,12 +449,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01B5BED32BA1F9A2007DC687 /* MainViewController.swift in Sources */,
 				01307F4F2BA2CE80003E9A47 /* ListDetailViewModel.swift in Sources */,
 				01B5BF042BA1FFC5007DC687 /* NibLoadable.swift in Sources */,
+				01307F722BA38BDF003E9A47 /* UIViewController+Ext.swift in Sources */,
 				01307F452BA220E4003E9A47 /* WebImageLoader.swift in Sources */,
 				01307F632BA36DCE003E9A47 /* ListTableViewController.swift in Sources */,
 				01B5BECF2BA1F9A2007DC687 /* AppDelegate.swift in Sources */,
+				01307F6F2BA389EA003E9A47 /* MainViewController.swift in Sources */,
 				01307F3A2BA2172D003E9A47 /* HTTPTask.swift in Sources */,
 				01307F412BA21E8F003E9A47 /* ListViewCell.swift in Sources */,
 				01307F312BA20E39003E9A47 /* ListTableViewModelView.swift in Sources */,

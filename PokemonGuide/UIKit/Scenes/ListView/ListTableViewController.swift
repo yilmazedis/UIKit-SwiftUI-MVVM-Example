@@ -70,6 +70,6 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ListDetailCoordinator(navigator: navigationController).start(with: items[indexPath.row])
+        viewModel.coordinator.showDetail(with: items[indexPath.row])
     }
 }
