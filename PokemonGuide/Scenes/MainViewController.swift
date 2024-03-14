@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIViewController {
     static func loadController() -> Self {
@@ -33,6 +34,17 @@ class MainViewController: UIViewController {
         prepareView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "toolbarColor")
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
     private func prepareView() {
         uiKitButton.setTitle("UIKit", for: .normal)
         uiKitButton.layer.borderColor = UIColor.black.cgColor
@@ -42,7 +54,7 @@ class MainViewController: UIViewController {
         swiftUIButton.setTitle("SwiftUI", for: .normal)
         swiftUIButton.layer.borderColor = UIColor.black.cgColor
         swiftUIButton.layer.borderWidth = 1
-        swiftUIButton.layer.cornerRadius = 5
+        swiftUIButton.layer.cornerRadius = 5        
     }
     
     @IBAction func uikitButtonAction(_ sender: Any) {
@@ -52,7 +64,9 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func swiftUIButtonAction(_ sender: Any) {
-        print("aasdasdwaeqwe")
+        let vc = UIHostingController(rootView: PokemonList())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
