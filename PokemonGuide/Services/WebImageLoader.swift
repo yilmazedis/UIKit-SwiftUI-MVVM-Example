@@ -8,15 +8,15 @@
 import UIKit
 import Combine
 
-class WebImageLoader {
+final class WebImageLoader {
     
-    let url: URL
+    private let url: URL
     
     init(url: URL) {
         self.url = url
     }
     
-    func handleResponse(data: Data?, response: URLResponse?) -> UIImage? {
+    private func handleResponse(data: Data?, response: URLResponse?) -> UIImage? {
         guard
             let data = data,
             let image = UIImage(data: data),
