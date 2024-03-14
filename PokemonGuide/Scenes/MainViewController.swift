@@ -58,13 +58,13 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func uikitButtonAction(_ sender: Any) {
-        
-        let vc = ListTableViewController.loadController()
-        navigationController?.pushViewController(vc, animated: true)
+        ListTableViewCoordinator(navigator: navigationController).start()
     }
 
     @IBAction func swiftUIButtonAction(_ sender: Any) {
-        let vc = UIHostingController(rootView: PokemonList())
+        let httpTask = HTTPTask()
+        let vm = PokemonListViewModel(httpTask: httpTask)
+        let vc = UIHostingController(rootView: PokemonList(viewModel: vm))
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

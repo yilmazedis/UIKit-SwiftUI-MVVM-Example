@@ -10,7 +10,15 @@ import Combine
 
 final class ListTableViewModelView {
     
-    private let httpTask = HTTPTask()
+    var coordinator: ListTableViewCoordinator!
+    
+    let title = "a12e3123e12e4"
+    
+    private let httpTask: HTTPTaskProtocol
+    
+    init(httpTask: HTTPTaskProtocol) {
+        self.httpTask = httpTask
+    }
     
     func fetchPokemonItems() -> AnyPublisher<[PokemonItem], Error> {
         guard let url = URL(string: Constants.pokemonListUrl)

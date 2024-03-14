@@ -2,7 +2,7 @@
 //  ListDetailViewController.swift
 //  PokemonGuide
 //
-//  Created by yilmaz on 14.03.2024.
+//  Created by yilmaz on 15.03.2024.
 //
 
 import UIKit
@@ -14,12 +14,14 @@ final class ListDetailViewController: UIViewController {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var detailLabel: UILabel!
     
+    var item: PokemonItem!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ListDetailViewModel()
+        prepareView()
     }
     
-    func configure(item: PokemonItem) {
+    private func prepareView() {
         title = item.name
         detailLabel.text = item.description
         posterImageView.loadWebImage(url: item.imageUrl)
