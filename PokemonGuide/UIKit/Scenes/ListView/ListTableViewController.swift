@@ -1,8 +1,8 @@
 //
-//  UIKitListViewController.swift
+//  ListTableViewController.swift
 //  PokemonGuide
 //
-//  Created by yilmaz on 14.03.2024.
+//  Created by yilmaz on 15.03.2024.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ final class ListTableViewController: UIViewController {
     
     var viewModel: ListTableViewModelView!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     private var cancellables = Set<AnyCancellable>()
 
@@ -24,17 +24,21 @@ final class ListTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ListTableViewModelView()
         prepareView()
         
-        viewModel.fetchPokemonItems()
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-                
-            } receiveValue: { [weak self] items in
-                self?.items = items
-            }
-            .store(in: &cancellables)
+        items.append(PokemonItem(id: 1,
+                                 name: "Bulbasaur",
+                                 description: "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
+                                 imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"))
+        
+//        viewModel.fetchPokemonItems()
+//            .receive(on: DispatchQueue.main)
+//            .sink { _ in
+//
+//            } receiveValue: { [weak self] items in
+//                self?.items = items
+//            }
+//            .store(in: &cancellables)
     }
     
     private func prepareView() {
@@ -64,8 +68,6 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ListDetailViewController.loadController()
-        vc.configure(item: items[indexPath.row])
-        navigationController?.pushViewController(vc, animated: true)
+        viewModel.coordinator.showDetail(with: items[indexPath.row])
     }
 }

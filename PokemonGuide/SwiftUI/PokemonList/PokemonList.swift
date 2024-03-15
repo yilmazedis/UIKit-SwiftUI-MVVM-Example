@@ -9,7 +9,11 @@ import SwiftUI
 
 final class PokemonListViewModel: ObservableObject {
     @Published var items: [PokemonItem] = []
-    private let httpTask = HTTPTask()
+    private let httpTask: HTTPTaskProtocol
+    
+    init(httpTask: HTTPTask) {
+        self.httpTask = httpTask
+    }
     
     func fetchPokemonItems() async {
         guard let url = URL(string: Constants.pokemonListUrl) else { return }
@@ -28,8 +32,12 @@ final class PokemonListViewModel: ObservableObject {
 
 struct PokemonList: View {
     
-    @StateObject var viewModel = PokemonListViewModel()
-    @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel: PokemonListViewModel
+    @Environment(\.dismiss) private var dismiss
+    
+    init(viewModel: PokemonListViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         NavigationStack {
@@ -69,5 +77,7 @@ struct PokemonList: View {
 }
 
 #Preview {
-    PokemonList()
+    let httpTask = HTTPTask()
+    let vm = PokemonListViewModel(httpTask: httpTask)
+    return PokemonList(viewModel: vm)
 }

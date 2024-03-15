@@ -8,7 +8,13 @@
 import UIKit
 import Combine
 
-class HTTPTask {
+protocol HTTPTaskProtocol {
+    func downloadWithAsync(url: URL) async throws -> [PokemonItem]
+    func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error>
+    func downloadWithEscaping(url: URL, completionHandler: @escaping (_ items: [PokemonItem]?, _ error: Error?) -> ())
+}
+
+final class HTTPTask: HTTPTaskProtocol {
     private func handleResponse(data: Data?, response: URLResponse?) throws -> [PokemonItem] {
         guard let data = data,
               let response = response as? HTTPURLResponse,
