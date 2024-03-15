@@ -6,6 +6,8 @@
 //
 
 import XCTest
+import Combine
+@testable import PokemonGuide
 
 final class PokemonGuideUITestsLaunchTests: XCTestCase {
 

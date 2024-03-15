@@ -25,20 +25,14 @@ final class ListTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()
-        
-        items.append(PokemonItem(id: 1,
-                                 name: "Bulbasaur",
-                                 description: "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
-                                 imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"))
-        
-//        viewModel.fetchPokemonItems()
-//            .receive(on: DispatchQueue.main)
-//            .sink { _ in
-//
-//            } receiveValue: { [weak self] items in
-//                self?.items = items
-//            }
-//            .store(in: &cancellables)
+        viewModel.fetchPokemonItems()
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+
+            } receiveValue: { [weak self] items in
+                self?.items = items
+            }
+            .store(in: &cancellables)
     }
     
     private func prepareView() {
