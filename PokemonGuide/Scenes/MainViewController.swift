@@ -35,11 +35,13 @@ final class MainViewController: UIViewController {
         uiKitButton.layer.borderColor = UIColor.black.cgColor
         uiKitButton.layer.borderWidth = 1
         uiKitButton.layer.cornerRadius = 5
+        uiKitButton.accessibilityIdentifier = "uiKitButton"
         
         swiftUIButton.setTitle("SwiftUI", for: .normal)
         swiftUIButton.layer.borderColor = UIColor.black.cgColor
         swiftUIButton.layer.borderWidth = 1
         swiftUIButton.layer.cornerRadius = 5
+        swiftUIButton.accessibilityIdentifier = "swiftUIButton"
     }
     
     @IBAction private func uikitButtonAction(_ sender: Any) {

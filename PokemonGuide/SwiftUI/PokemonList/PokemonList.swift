@@ -23,11 +23,13 @@ struct PokemonList: View {
                     ForEach(viewModel.items, id: \.self) { item in
                         NavigationLink(value: item) {
                             PokemonRowView(item: item)
-                        }.buttonStyle(PlainButtonStyle())
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 Spacer()
             }
+            .accessibilityIdentifier("DetailButton")
             .navigationDestination(for: PokemonItem.self) { item in
                 PokemonDetailView(item: item)
             }

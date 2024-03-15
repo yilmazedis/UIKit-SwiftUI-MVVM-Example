@@ -24,6 +24,7 @@ struct PokemonDetailView: View {
             
             ScrollView {
                 Text(item.description)
+                    .accessibilityIdentifier("detailTitle")
                     .padding()
             }
         }
