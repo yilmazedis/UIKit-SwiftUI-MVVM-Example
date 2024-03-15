@@ -25,5 +25,7 @@ final class ListDetailViewController: UIViewController {
         title = item.name
         detailLabel.text = item.description
         posterImageView.loadWebImage(url: item.imageUrl)
+        
+        detailLabel.accessibilityIdentifier = "detailLabel"
     }
 }
