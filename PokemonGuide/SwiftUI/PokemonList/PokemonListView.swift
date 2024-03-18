@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonList: View {
+struct PokemonListView: View {
     
     @StateObject private var viewModel: PokemonListViewModel
     @Environment(\.dismiss) private var dismiss
@@ -58,5 +58,5 @@ struct PokemonList: View {
 #Preview {
     let httpTask = HTTPTask()
     let vm = PokemonListViewModel(httpTask: httpTask)
-    return PokemonList(viewModel: vm)
+    return PokemonListView(viewModel: vm)
 }

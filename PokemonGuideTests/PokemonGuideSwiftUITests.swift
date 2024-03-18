@@ -8,6 +8,7 @@
 import XCTest
 @testable import PokemonGuide
 
+@MainActor 
 final class PokemonGuideSwiftUITests: XCTestCase {
     var viewModel: PokemonListViewModel!
     var mockHttpTask: MockHTTPTask!

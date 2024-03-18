@@ -27,14 +27,6 @@ final class WebImageLoader {
         return image
     }
     
-    func downloadWithEscaping(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> ()) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            let image = self?.handleResponse(data: data, response: response)
-            completionHandler(image, error)
-        }
-        .resume()
-    }
-    
     func downloadWithCombine() -> AnyPublisher<UIImage?, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
             .map(handleResponse)
@@ -50,5 +42,4 @@ final class WebImageLoader {
             throw error
         }
     }
-    
 }

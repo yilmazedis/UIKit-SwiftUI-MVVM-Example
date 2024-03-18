@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ListTableViewCoordinator {
+final class ListTableCoordinator {
     
     weak var navigator: UINavigationController?
     
@@ -17,7 +17,7 @@ final class ListTableViewCoordinator {
     
     public func start() {
         let view = ListTableViewController.loadController()
-        view.viewModel = ListTableViewModelView(httpTask: HTTPTask())
+        view.viewModel = ListTableViewModel(httpTask: HTTPTask())
         view.viewModel.coordinator = self
         
         navigator?.pushViewController(view, animated: true)

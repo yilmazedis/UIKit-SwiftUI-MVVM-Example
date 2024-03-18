@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-final class ListTableViewModelView {
+final class ListTableViewModel {
     
-    var coordinator: ListTableViewCoordinator!
+    var coordinator: ListTableCoordinator!
 
     private let httpTask: HTTPTaskProtocol
     

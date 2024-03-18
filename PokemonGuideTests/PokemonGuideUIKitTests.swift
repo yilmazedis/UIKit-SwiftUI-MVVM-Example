@@ -10,7 +10,7 @@ import Combine
 @testable import PokemonGuide
 
 final class PokemonGuideUIKitTests: XCTestCase {
-    var viewModel: ListTableViewModelView!
+    var viewModel: ListTableViewModel!
     var mockHttpTask: MockHTTPTask!
     
     private var cancellables = Set<AnyCancellable>()
@@ -18,7 +18,7 @@ final class PokemonGuideUIKitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockHttpTask = MockHTTPTask()
-        viewModel = ListTableViewModelView(httpTask: mockHttpTask)
+        viewModel = ListTableViewModel(httpTask: mockHttpTask)
     }
     
     override func tearDown() {

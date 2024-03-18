@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 final class PokemonListViewModel: ObservableObject {
     @Published var items: [PokemonItem] = []
     private let httpTask: HTTPTaskProtocol
@@ -19,9 +20,12 @@ final class PokemonListViewModel: ObservableObject {
         guard let url = URL(string: Constants.pokemonListUrl) else { return }
         do {
             let items = try await httpTask.downloadWithAsync(url: url)
-            await MainActor.run {
-                self.items = items
-            }
+            self.items = items
+            // You can also mark class or (funtion and property) as MainActor
+            // not to use MainActor.run explicitly
+//            await MainActor.run {
+//                self.items = items
+//            }
         } catch {
             print(error.localizedDescription)
         }

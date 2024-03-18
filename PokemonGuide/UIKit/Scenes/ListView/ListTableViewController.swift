@@ -10,7 +10,7 @@ import Combine
 
 final class ListTableViewController: UIViewController {
     
-    var viewModel: ListTableViewModelView!
+    var viewModel: ListTableViewModel!
     
     @IBOutlet private weak var tableView: UITableView!
     

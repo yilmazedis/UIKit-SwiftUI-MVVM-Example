@@ -14,9 +14,14 @@ extension UIImageView {
         Task {
             let loader = WebImageLoader(url: url)
             let image = try? await loader.downloadWithAsync()
-            await MainActor.run {
-                self.image = image
-            }
+            self.image = image
+            
+            // You dont need to use MainActor.run
+            // Because UIImageView already run on MainActor
+            // @MainActor class UIImageView : UIView
+//            await MainActor.run {
+//                self.image = image
+//            }
         }
     }
 }
