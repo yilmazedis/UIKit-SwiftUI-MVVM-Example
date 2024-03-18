@@ -31,7 +31,7 @@ struct PokemonListView: View {
             }
             .accessibilityIdentifier("DetailButton")
             .navigationDestination(for: PokemonItem.self) { item in
-                PokemonDetailView(item: item)
+                PokemonDetailView(viewModel: PokemonDetailViewModel(item: item))
             }
             .navigationBarItems(
                 leading: Button(action: {

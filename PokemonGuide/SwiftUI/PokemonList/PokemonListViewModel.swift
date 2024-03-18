@@ -21,11 +21,6 @@ final class PokemonListViewModel: ObservableObject {
         do {
             let items = try await httpTask.downloadWithAsync(url: url)
             self.items = items
-            // You can also mark class or (funtion and property) as MainActor
-            // not to use MainActor.run explicitly
-//            await MainActor.run {
-//                self.items = items
-//            }
         } catch {
             print(error.localizedDescription)
         }

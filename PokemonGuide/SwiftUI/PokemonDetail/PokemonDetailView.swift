@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    @StateObject var viewModel: PokemonDetailViewModel
     
-    let item: PokemonItem
-    
-    @State private var image: UIImage?
+    init(viewModel: PokemonDetailViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         VStack {
-            if let image = image {
+            if let image = viewModel.image {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
@@ -23,31 +24,26 @@ struct PokemonDetailView: View {
             }
             
             ScrollView {
-                Text(item.description)
+                Text(viewModel.item.description)
                     .accessibilityIdentifier("detailTitle")
                     .padding()
             }
         }
-        .navigationTitle(item.name)
+        .navigationTitle(viewModel.item.name)
         .toolbarBackground(
             Color("toolbarColor"),
             for: .navigationBar
         )
         .toolbarBackground(.visible, for: .navigationBar)
         .task {
-            guard let url = URL(string: item.imageUrl) else { return }
-            
-            let image = try? await WebImageLoader(url: url).downloadWithAsync()
-            await MainActor.run {
-                self.image = image
-            }
+            await viewModel.fetchImage()
         }
     }
 }
 
 #Preview {
-    PokemonDetailView(item: PokemonItem(id: 1,
-                                     name: "Bulbasaur",
-                                     description: "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
-                                     imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"))
+    PokemonDetailView(viewModel: PokemonDetailViewModel(item: PokemonItem(id: 1,
+                                                                     name: "Bulbasaur",
+                                                                     description: "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
+                                                                     imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")))
 }

@@ -38,6 +38,7 @@
 		01B5BEE62BA1F9A5007DC687 /* PokemonGuideSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEE52BA1F9A5007DC687 /* PokemonGuideSwiftUITests.swift */; };
 		01B5BEF02BA1F9A5007DC687 /* PokemonGuideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEEF2BA1F9A5007DC687 /* PokemonGuideUITests.swift */; };
 		01B5BEF22BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEF12BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift */; };
+		01F748B22BA8F06E00F04E00 /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F748B12BA8F06E00F04E00 /* PokemonDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		01B5BEEB2BA1F9A5007DC687 /* PokemonGuideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonGuideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B5BEEF2BA1F9A5007DC687 /* PokemonGuideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGuideUITests.swift; sourceTree = "<group>"; };
 		01B5BEF12BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGuideUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		01F748B12BA8F06E00F04E00 /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				01307F592BA2F1E4003E9A47 /* PokemonDetailView.swift */,
+				01F748B12BA8F06E00F04E00 /* PokemonDetailViewModel.swift */,
 			);
 			path = PokemonDetail;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				01307F412BA21E8F003E9A47 /* ListViewCell.swift in Sources */,
 				01307F312BA20E39003E9A47 /* ListTableViewModel.swift in Sources */,
 				01307F6B2BA3738D003E9A47 /* ListDetailViewController.swift in Sources */,
+				01F748B22BA8F06E00F04E00 /* PokemonDetailViewModel.swift in Sources */,
 				01307F5A2BA2F1E4003E9A47 /* PokemonDetailView.swift in Sources */,
 				01307F3D2BA21A75003E9A47 /* Constants.swift in Sources */,
 				01307F482BA22495003E9A47 /* UIImageView+Ext.swift in Sources */,
