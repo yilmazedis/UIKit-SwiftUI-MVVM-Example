@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -20,14 +21,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6nj-bj-RMg">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6nj-bj-RMg" secondAttribute="bottom" id="4tx-2d-6Lm"/>
+                <constraint firstAttribute="bottom" secondItem="6nj-bj-RMg" secondAttribute="bottom" id="4tx-2d-6Lm"/>
                 <constraint firstItem="6nj-bj-RMg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="LBa-0V-w4s"/>
                 <constraint firstItem="6nj-bj-RMg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vFe-dD-cv7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6nj-bj-RMg" secondAttribute="trailing" id="zEF-it-vWY"/>
