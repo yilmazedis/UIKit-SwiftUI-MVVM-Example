@@ -11,6 +11,8 @@ extension UIImageView {
     func loadWebImage(url: URL) {        
         Task {
             let loader = WebImageLoader(url: url)
+            
+            // I might handle error here, for now no need
             let image = try? await loader.downloadWithAsync()
             self.image = image
             

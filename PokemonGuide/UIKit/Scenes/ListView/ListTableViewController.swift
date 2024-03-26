@@ -21,8 +21,13 @@ final class ListTableViewController: UIViewController {
         prepareView()
         viewModel.fetchPokemonItems()
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching Pokemon items: \(error)")
+                case .finished:
+                    break
+                }
             } receiveValue: { [weak self] items in
                 self?.viewModel.items = items
                 self?.tableView.reloadData()

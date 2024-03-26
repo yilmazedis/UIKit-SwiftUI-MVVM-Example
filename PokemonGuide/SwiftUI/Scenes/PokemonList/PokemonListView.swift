@@ -27,6 +27,7 @@ struct PokemonListView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
+                .padding([.trailing, .vertical], 20)
                 Spacer()
             }
             .accessibilityIdentifier("DetailButton")
