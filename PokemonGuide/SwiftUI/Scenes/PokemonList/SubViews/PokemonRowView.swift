@@ -30,9 +30,7 @@ struct PokemonRowView: View {
             }
         }
         .task {
-            guard let url = URL(string: item.imageUrl) else { return }
-            
-            let image = try? await WebImageLoader(url: url).downloadWithAsync()
+            let image = try? await WebImageLoader(url: item.imageUrl).downloadWithAsync()
             await MainActor.run {
                 self.image = image
             }
@@ -44,5 +42,5 @@ struct PokemonRowView: View {
     PokemonRowView(item: PokemonItem(id: 1,
                                      name: "Bulbasaur",
                                      description: "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
-                                     imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"))
+                                     imageUrl: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!))
 }

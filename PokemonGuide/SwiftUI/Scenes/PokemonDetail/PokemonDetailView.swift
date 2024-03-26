@@ -45,5 +45,5 @@ struct PokemonDetailView: View {
     PokemonDetailView(viewModel: PokemonDetailViewModel(item: PokemonItem(id: 1,
                                                                      name: "Bulbasaur",
                                                                      description: "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
-                                                                     imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")))
+                                                                     imageUrl: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!)))
 }

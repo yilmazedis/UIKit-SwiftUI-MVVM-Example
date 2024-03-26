@@ -17,9 +17,7 @@ final class ListDetailCoordinator {
     
     public func start(with item: PokemonItem) {
         let view = ListDetailViewController.loadController()
-        view.item = item
-        view.viewModel = ListDetailViewModel()
-        view.viewModel.coordinator = self
+        view.viewModel = ListDetailViewModel(coordinator: self, item: item)
         
         navigator?.pushViewController(view, animated: true)
     }

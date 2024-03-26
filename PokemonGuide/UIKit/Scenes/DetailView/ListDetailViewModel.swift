@@ -8,5 +8,11 @@
 import Foundation
 
 final class ListDetailViewModel {
-    var coordinator: ListDetailCoordinator!
+    let coordinator: ListDetailCoordinator
+    var item: PokemonItem
+    
+    init(coordinator: ListDetailCoordinator, item: PokemonItem) {
+        self.coordinator = coordinator
+        self.item = item
+    }
 }

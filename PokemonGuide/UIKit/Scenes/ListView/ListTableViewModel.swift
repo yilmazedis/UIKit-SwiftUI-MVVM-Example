@@ -10,12 +10,13 @@ import Combine
 
 final class ListTableViewModel {
     
-    var coordinator: ListTableCoordinator!
-
+    let coordinator: ListTableCoordinator
     private let httpTask: HTTPTaskProtocol
+    @Published var items: [PokemonItem] = []
     
-    init(httpTask: HTTPTaskProtocol) {
+    init(coordinator: ListTableCoordinator, httpTask: HTTPTaskProtocol) {
         self.httpTask = httpTask
+        self.coordinator = coordinator
     }
     
     func fetchPokemonItems() -> AnyPublisher<[PokemonItem], Error> {

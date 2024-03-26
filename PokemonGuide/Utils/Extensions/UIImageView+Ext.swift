@@ -8,9 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func loadWebImage(url: String) {
-        guard let url = URL(string: url) else { return }
-        
+    func loadWebImage(url: URL) {        
         Task {
             let loader = WebImageLoader(url: url)
             let image = try? await loader.downloadWithAsync()

@@ -15,10 +15,8 @@ class PokemonDetailViewModel: ObservableObject {
         self.item = item
     }
     
-    func fetchImage() async {
-        guard let url = URL(string: item.imageUrl) else { return }
-        
-        let image = try? await WebImageLoader(url: url).downloadWithAsync()
+    func fetchImage() async {        
+        let image = try? await WebImageLoader(url: item.imageUrl).downloadWithAsync()
         await MainActor.run {
             self.image = image
         }

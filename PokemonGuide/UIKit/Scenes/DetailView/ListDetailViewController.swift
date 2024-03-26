@@ -13,8 +13,6 @@ final class ListDetailViewController: UIViewController {
     
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var detailLabel: UILabel!
-    
-    var item: PokemonItem!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +20,9 @@ final class ListDetailViewController: UIViewController {
     }
     
     private func prepareView() {
-        title = item.name
-        detailLabel.text = item.description
-        posterImageView.loadWebImage(url: item.imageUrl)
+        title = viewModel.item.name
+        detailLabel.text = viewModel.item.description
+        posterImageView.loadWebImage(url: viewModel.item.imageUrl)
         
         detailLabel.accessibilityIdentifier = "detailLabel"
     }

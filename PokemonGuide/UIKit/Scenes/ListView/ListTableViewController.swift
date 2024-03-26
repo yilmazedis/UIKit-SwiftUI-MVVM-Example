@@ -15,12 +15,6 @@ final class ListTableViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     private var cancellables = Set<AnyCancellable>()
-
-    private var items: [PokemonItem] = [] {
-        didSet {
-          tableView.reloadData()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +24,8 @@ final class ListTableViewController: UIViewController {
             .sink { _ in
 
             } receiveValue: { [weak self] items in
-                self?.items = items
+                self?.viewModel.items = items
+                self?.tableView.reloadData()
             }
             .store(in: &cancellables)
     }
@@ -48,7 +43,7 @@ final class ListTableViewController: UIViewController {
 extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return viewModel.items.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,12 +51,12 @@ extension ListTableViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(item: items[indexPath.row])
+        cell.configure(item: viewModel.items[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.coordinator.showDetail(with: items[indexPath.row])
+        viewModel.coordinator.showDetail(with: viewModel.items[indexPath.row])
     }
 }

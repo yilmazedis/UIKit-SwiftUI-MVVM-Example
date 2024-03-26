@@ -17,9 +17,7 @@ final class ListTableCoordinator {
     
     public func start() {
         let view = ListTableViewController.loadController()
-        view.viewModel = ListTableViewModel(httpTask: HTTPTask())
-        view.viewModel.coordinator = self
-        
+        view.viewModel = ListTableViewModel(coordinator: self, httpTask: HTTPTask())        
         navigator?.pushViewController(view, animated: true)
     }
     

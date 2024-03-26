@@ -21,27 +21,18 @@ final class HTTPTask: HTTPTaskProtocol {
             throw URLError(.badServerResponse)
         }
         
-        do {
-            let result = try JSONDecoder().decode([PokemonItem].self, from: data)
-            return result
-        } catch {
-            throw error
-        }
+        let result = try JSONDecoder().decode([PokemonItem].self, from: data)
+        return result
     }
     
     func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error> {
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap(handleResponse)
-            .mapError({ $0 })
             .eraseToAnyPublisher()
     }
     
     func downloadWithAsync(url: URL) async throws -> [PokemonItem] {
-        do {
-            let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
-            return try handleResponse(data: data, response: response)
-        } catch {
-            throw error
-        }
+        let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
+        return try handleResponse(data: data, response: response)
     }
 }
