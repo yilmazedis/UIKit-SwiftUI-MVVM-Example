@@ -2,37 +2,49 @@
 //  HTTPTask.swift
 //  PokemonGuide
 //
-//  Created by yilmaz on 14.03.2024.
+//  Created by yilmaz on 9.04.2024.
 //
 
-import UIKit
-import Combine
+import Foundation
 
-protocol HTTPTaskProtocol {
-    func downloadWithAsync(url: URL) async throws -> [PokemonItem]
-    func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error>
+struct HTTPMethod: RawRepresentable {
+    /// `CONNECT` method.
+    static let connect = HTTPMethod(rawValue: "CONNECT")
+    /// `DELETE` method.
+    static let delete = HTTPMethod(rawValue: "DELETE")
+    /// `GET` method.
+    static let get = HTTPMethod(rawValue: "GET")
+    /// `HEAD` method.
+    static let head = HTTPMethod(rawValue: "HEAD")
+    /// `OPTIONS` method.
+    static let options = HTTPMethod(rawValue: "OPTIONS")
+    /// `PATCH` method.
+    static let patch = HTTPMethod(rawValue: "PATCH")
+    /// `POST` method.
+    static let post = HTTPMethod(rawValue: "POST")
+    /// `PUT` method.
+    static let put = HTTPMethod(rawValue: "PUT")
+    /// `QUERY` method.
+    static let query = HTTPMethod(rawValue: "QUERY")
+    /// `TRACE` method.
+    static let trace = HTTPMethod(rawValue: "TRACE")
+
+    public let rawValue: String
+
+    init(rawValue: String) {
+        self.rawValue = rawValue
+    }
 }
 
-final class HTTPTask: HTTPTaskProtocol {
-    private func handleResponse(data: Data?, response: URLResponse?) throws -> [PokemonItem] {
-        guard let data = data,
-              let response = response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let result = try JSONDecoder().decode([PokemonItem].self, from: data)
-        return result
-    }
-    
-    func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error> {
-        URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap(handleResponse)
-            .eraseToAnyPublisher()
-    }
-    
-    func downloadWithAsync(url: URL) async throws -> [PokemonItem] {
-        let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
-        return try handleResponse(data: data, response: response)
-    }
+typealias Parameters = [String: Any]
+
+protocol HTTPTask {
+  var method: HTTPMethod { get }
+  var body: Parameters? { get }
+  var path: String { get }
+}
+
+extension HTTPTask {
+    var method: HTTPMethod { return .get }
+    var body: Parameters? { return nil }
 }

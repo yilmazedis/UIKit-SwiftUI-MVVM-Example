@@ -11,17 +11,15 @@ import Combine
 final class ListTableViewModel {
     
     let coordinator: ListTableCoordinator
-    private let httpTask: HTTPTaskProtocol
-    @Published var items: [PokemonItem] = []
+    private let httpTask: NetworkManagerProtocol
     
-    init(coordinator: ListTableCoordinator, httpTask: HTTPTaskProtocol) {
+    init(coordinator: ListTableCoordinator, httpTask: NetworkManagerProtocol) {
         self.httpTask = httpTask
         self.coordinator = coordinator
     }
     
     func fetchPokemonItems() -> AnyPublisher<[PokemonItem], Error> {
-        guard let url = URL(string: Constants.pokemonListUrl)
-        else { return Fail(error: URLError(.badURL)).eraseToAnyPublisher() }
-        return httpTask.downloadWithCombine(url: url)
+        let task = ListTableTask()
+        return httpTask.downloadWithCombine(task: task)
     }
 }

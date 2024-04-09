@@ -10,9 +10,9 @@ import SwiftUI
 @MainActor
 final class PokemonListViewModel: ObservableObject {
     @Published var items: [PokemonItem] = []
-    private let httpTask: HTTPTaskProtocol
+    private let httpTask: NetworkManagerProtocol
     
-    init(httpTask: HTTPTaskProtocol) {
+    init(httpTask: NetworkManagerProtocol) {
         self.httpTask = httpTask
     }
     

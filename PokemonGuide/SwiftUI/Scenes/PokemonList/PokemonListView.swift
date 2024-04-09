@@ -57,7 +57,7 @@ struct PokemonListView: View {
 }
 
 #Preview {
-    let httpTask = HTTPTask()
+    let httpTask = NetworkManager()
     let vm = PokemonListViewModel(httpTask: httpTask)
     return PokemonListView(viewModel: vm)
 }

@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import PokemonGuide
 
-class MockHTTPTask: HTTPTaskProtocol {
+class MockHTTPTask: NetworkManagerProtocol {
     var shouldThrowError = false
     var itemsToReturn: [PokemonItem] = []
     

@@ -27,6 +27,8 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        updateButtonBorderColor()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -68,7 +70,7 @@ final class MainViewController: UIViewController {
     }
 
     @IBAction private func swiftUIButtonAction(_ sender: Any) {
-        let httpTask = HTTPTask()
+        let httpTask = NetworkManager()
         let vm = PokemonListViewModel(httpTask: httpTask)
         let vc = UIHostingController(rootView: PokemonListView(viewModel: vm))
         vc.modalPresentationStyle = .fullScreen
