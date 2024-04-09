@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol NetworkManagerProtocol {
-    func downloadWithAsync(url: URL) async throws -> [PokemonItem]
+    func downloadWithAsync(task: HTTPTask) async throws -> [PokemonItem]
     func downloadWithCombine(task: HTTPTask) -> AnyPublisher<[PokemonItem], Error>
 }
 
@@ -43,8 +43,12 @@ final class NetworkManager: NetworkManagerProtocol {
             .eraseToAnyPublisher()
     }
     
-    func downloadWithAsync(url: URL) async throws -> [PokemonItem] {
-        let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
+    func downloadWithAsync(task: HTTPTask) async throws -> [PokemonItem] {
+        guard let request = requestBuilder.buildRequest(from: task) else {
+            throw DownloadError.failedToBuildRequest
+        }
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
         return try handleResponse(data: data, response: response)
     }
 }

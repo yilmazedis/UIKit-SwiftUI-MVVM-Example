@@ -17,9 +17,9 @@ final class PokemonListViewModel: ObservableObject {
     }
     
     func fetchPokemonItems() async {
-        guard let url = URL(string: Constants.pokemonListUrl) else { return }
+        let task = PokemonListTask()
         do {
-            let items = try await httpTask.downloadWithAsync(url: url)
+            let items = try await httpTask.downloadWithAsync(task: task)
             self.items = items
         } catch {
             print(error.localizedDescription)
