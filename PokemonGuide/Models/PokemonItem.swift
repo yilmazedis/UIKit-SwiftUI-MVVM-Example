@@ -40,4 +40,8 @@ struct PokemonItem: Codable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+    
+    static var dummy: PokemonItem {
+        PokemonItem(id: 0, name: "", description: "", imageUrl: URL(string: Constants.pokemonListUrl)!)
+    }
 }

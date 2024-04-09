@@ -18,7 +18,7 @@ final class PokemonGuideUIKitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockHttpTask = MockHTTPTask()
-        viewModel = ListTableViewModel(httpTask: mockHttpTask)
+        viewModel = ListTableViewModel(coordinator: ListTableCoordinator(navigator: nil), httpTask: mockHttpTask)
     }
     
     override func tearDown() {
@@ -28,7 +28,7 @@ final class PokemonGuideUIKitTests: XCTestCase {
     }
     
     func testFetchPokemonItems_Success() async throws {
-        let expectedItems = [PokemonItem(id: 1, name: "Pikachu", description: "", imageUrl: "")]
+        let expectedItems = [PokemonItem.dummy]
         mockHttpTask.itemsToReturn = expectedItems
         
         viewModel.fetchPokemonItems()
@@ -52,6 +52,34 @@ final class PokemonGuideUIKitTests: XCTestCase {
                 XCTAssertTrue(items.isEmpty)
             }
             .store(in: &cancellables)
+    }
+    
+    // MARK: - ListTableCoordinator Tests
+    
+    // Test if coordinator starts without crashing
+    // forexample if I forget to assign ViewModel my app will crash
+    // Because it is only force unwrap
+    func testListTableCoordinatorStart() {
+        let navigator = UINavigationController()
+        let coordinator = ListTableCoordinator(navigator: navigator)
+        coordinator.start()
+        
+        let vm = (navigator.topViewController as? ListTableViewController)?.viewModel
+        XCTAssertNotNil(vm)
+    }
+    
+    // MARK: - ListDetailCoordinator Tests
+    
+    // Test if coordinator starts without crashing
+    // forexample if I forget to assign ViewModel my app will crash
+    // Because it is only force unwrap
+    func testListDetailCoordinatorStart() {
+        let navigator = UINavigationController()
+        let coordinator = ListDetailCoordinator(navigator: navigator)
+        coordinator.start(with: PokemonItem.dummy)
+        
+        let vm = (navigator.topViewController as? ListDetailViewController)?.viewModel
+        XCTAssertNotNil(vm)
     }
     
     override func setUpWithError() throws {
