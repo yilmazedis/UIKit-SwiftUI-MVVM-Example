@@ -35,20 +35,6 @@ final class ListTableViewController: UIViewController {
                 }
             } receiveValue: { [weak self] items in
                 self?.applySnapshot(from: items)
-                
-                self?.viewModel.fetchPokemonItems()
-                    .receive(on: DispatchQueue.main)
-                    .sink { completion in
-                        switch completion {
-                        case .failure(let error):
-                            print("Error fetching Pokemon items: \(error)")
-                        case .finished:
-                            break
-                        }
-                    } receiveValue: { [weak self] items in
-                        self?.applySnapshot(from: items)
-                    }
-                    .store(in: &self!.cancellables)
             }
             .store(in: &cancellables)
     }

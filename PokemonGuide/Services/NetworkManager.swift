@@ -105,7 +105,6 @@ extension NetworkManager: URLSessionDelegate {
         // Local and Remote certificate Data
         let serverCertificateDataArray = trustCertificateChain.map { SecCertificateCopyData($0) }
         
-        
         // Get certificate from bundle
         guard let pathToCertificate = Bundle.main.path(forResource: "github.io", ofType: "cer"),
               let localCertificateData = NSData(contentsOfFile: pathToCertificate) else {
