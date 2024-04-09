@@ -13,26 +13,18 @@ class MockHTTPTask: NetworkManagerProtocol {
     var shouldThrowError = false
     var itemsToReturn: [PokemonItem] = []
     
-    func downloadWithAsync(url: URL) async throws -> [PokemonItem] {
+    func downloadWithAsync(task: HTTPTask) async throws -> [PokemonItem] {
         if shouldThrowError {
             throw URLError(.badServerResponse)
         }
         return itemsToReturn
     }
     
-    func downloadWithCombine(url: URL) -> AnyPublisher<[PokemonItem], Error> {
+    func downloadWithCombine(task: HTTPTask) -> AnyPublisher<[PokemonItem], Error> {
         if shouldThrowError {
             return Fail(error: URLError(.badServerResponse)).eraseToAnyPublisher()
         } else {
             return Just(itemsToReturn).setFailureType(to: Error.self).eraseToAnyPublisher()
-        }
-    }
-    
-    func downloadWithEscaping(url: URL, completionHandler: @escaping ([PokemonItem]?, Error?) -> ()) {
-        if shouldThrowError {
-            completionHandler(nil, URLError(.badServerResponse))
-        } else {
-            completionHandler(itemsToReturn, nil)
         }
     }
 }
