@@ -12,8 +12,7 @@ protocol RequestBuilder {
 }
 
 struct URLRequestBuilder: RequestBuilder {
-//    private var baseURL = AppScheme.current.rawValue
-    private var baseURL = Constants.pokemonListBaseUrl
+    private var baseURL = AppScheme.current.rawValue
     
     init() {}
     
@@ -26,7 +25,7 @@ struct URLRequestBuilder: RequestBuilder {
             Logger.log(.warning, "guard let fail")
             return nil
         }
-        
+        print(url)
         var request = URLRequest(url: url)
         request.httpMethod = task.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
