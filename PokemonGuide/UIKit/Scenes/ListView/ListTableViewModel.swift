@@ -11,9 +11,9 @@ import Combine
 final class ListTableViewModel {
     
     let coordinator: ListTableCoordinator
-    private let httpTask: NetworkManagerProtocol
+    private let httpTask: any NetworkManagerProtocol
     
-    init(coordinator: ListTableCoordinator, httpTask: NetworkManagerProtocol) {
+    init(coordinator: ListTableCoordinator, httpTask: any NetworkManagerProtocol) {
         self.httpTask = httpTask
         self.coordinator = coordinator
     }

@@ -42,6 +42,6 @@ struct PokemonItem: Codable, Hashable {
     }
     
     static var dummy: PokemonItem {
-        PokemonItem(id: 0, name: "", description: "", imageUrl: URL(string: Constants.pokemonListBaseUrl)!)
+        PokemonItem(id: 0, name: "", description: "", imageUrl: URL(string: AppScheme.current.rawValue)!)
     }
 }
