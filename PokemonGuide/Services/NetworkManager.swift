@@ -9,8 +9,8 @@ import UIKit
 import Combine
 
 protocol NetworkManagerProtocol {
-    func downloadWithCombine<T: Decodable>(task: HTTPTask, expecting: T.Type) -> AnyPublisher<[T], Error>
-    func downloadWithAsync<T: Decodable>(task: HTTPTask, expecting: T.Type) async throws -> [T]
+    func downloadWithCombine<T: Decodable>(task: HTTPTask) -> AnyPublisher<[T], Error>
+    func downloadWithAsync<T: Decodable>(task: HTTPTask) async throws -> [T]
 }
 
 final class NetworkManager: NSObject, NetworkManagerProtocol {
@@ -35,7 +35,7 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
         return result
     }
     
-    func downloadWithCombine<T: Decodable>(task: HTTPTask, expecting: T.Type) -> AnyPublisher<[T], Error> {
+    func downloadWithCombine<T: Decodable>(task: HTTPTask) -> AnyPublisher<[T], Error> {
         guard let request = requestBuilder.buildRequest(from: task) else {
             return Fail(error: DownloadError.failedToBuildRequest)
                 .eraseToAnyPublisher()
@@ -47,7 +47,7 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
             .eraseToAnyPublisher()
     }
     
-    func downloadWithAsync<T: Decodable>(task: HTTPTask, expecting: T.Type) async throws -> [T] {
+    func downloadWithAsync<T: Decodable>(task: HTTPTask) async throws -> [T] {
         guard let request = requestBuilder.buildRequest(from: task) else {
             throw DownloadError.failedToBuildRequest
         }

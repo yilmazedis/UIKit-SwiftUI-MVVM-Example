@@ -20,6 +20,6 @@ final class ListTableViewModel {
     
     func fetchPokemonItems() -> AnyPublisher<[PokemonItem], Error> {
         let task = ListTableTask()
-        return httpTask.downloadWithCombine(task: task, expecting: PokemonItem.self)
+        return httpTask.downloadWithCombine(task: task)
     }
 }
