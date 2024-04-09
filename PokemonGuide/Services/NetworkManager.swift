@@ -9,8 +9,8 @@ import UIKit
 import Combine
 
 protocol NetworkManagerProtocol {
-    func downloadWithAsync(task: HTTPTask) async throws -> [PokemonItem]
-    func downloadWithCombine(task: HTTPTask) -> AnyPublisher<[PokemonItem], Error>
+    func downloadWithCombine<T: Decodable>(task: HTTPTask, expecting: T.Type) -> AnyPublisher<[T], Error>
+    func downloadWithAsync<T: Decodable>(task: HTTPTask, expecting: T.Type) async throws -> [T]
 }
 
 final class NetworkManager: NSObject, NetworkManagerProtocol {
@@ -23,7 +23,7 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
         super.init()
     }
     
-    private func handleResponse(data: Data?, response: URLResponse?) throws -> [PokemonItem] {
+    private func handleResponse<T: Decodable>(data: Data?, response: URLResponse?) throws -> [T] {
         invalidateSession()
         guard let data = data,
               let response = response as? HTTPURLResponse,
@@ -31,11 +31,11 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
             throw URLError(.badServerResponse)
         }
         
-        let result = try JSONDecoder().decode([PokemonItem].self, from: data)
+        let result = try JSONDecoder().decode([T].self, from: data)
         return result
     }
     
-    func downloadWithCombine(task: HTTPTask) -> AnyPublisher<[PokemonItem], Error> {
+    func downloadWithCombine<T: Decodable>(task: HTTPTask, expecting: T.Type) -> AnyPublisher<[T], Error> {
         guard let request = requestBuilder.buildRequest(from: task) else {
             return Fail(error: DownloadError.failedToBuildRequest)
                 .eraseToAnyPublisher()
@@ -47,7 +47,7 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
             .eraseToAnyPublisher()
     }
     
-    func downloadWithAsync(task: HTTPTask) async throws -> [PokemonItem] {
+    func downloadWithAsync<T: Decodable>(task: HTTPTask, expecting: T.Type) async throws -> [T] {
         guard let request = requestBuilder.buildRequest(from: task) else {
             throw DownloadError.failedToBuildRequest
         }
