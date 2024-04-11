@@ -13,12 +13,17 @@ fileprivate typealias ListSnapshot = NSDiffableDataSourceSnapshot<ListTableViewC
 
 final class ListTableViewController: UIViewController {
 
-    var viewModel: ListTableViewModel!
+    private var viewModel: ListTableViewModel!
     
     @IBOutlet private weak var tableView: UITableView!
     
     private var dataSource: ListDataSource!
     private var cancellables = Set<AnyCancellable>()
+    
+    convenience init(viewModel: ListTableViewModel) {
+        self.init()
+        self.viewModel = viewModel
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

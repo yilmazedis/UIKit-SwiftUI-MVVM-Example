@@ -9,10 +9,15 @@ import UIKit
 
 final class ListDetailViewController: UIViewController {
     
-    var viewModel: ListDetailViewModel!
+    private var viewModel: ListDetailViewModel!
     
     @IBOutlet private weak var posterImageView: UIImageView!
     @IBOutlet private weak var detailLabel: UILabel!
+    
+    convenience init(viewModel: ListDetailViewModel) {
+        self.init()
+        self.viewModel = viewModel
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()

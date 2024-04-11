@@ -54,34 +54,6 @@ final class PokemonGuideUIKitTests: XCTestCase {
             .store(in: &cancellables)
     }
     
-    // MARK: - ListTableCoordinator Tests
-    
-    // Test if coordinator starts without crashing
-    // forexample if I forget to assign ViewModel my app will crash
-    // Because it is only force unwrap
-    func testListTableCoordinatorStart() {
-        let navigator = UINavigationController()
-        let coordinator = ListTableCoordinator(navigator: navigator)
-        coordinator.start()
-        
-        let vm = (navigator.topViewController as? ListTableViewController)?.viewModel
-        XCTAssertNotNil(vm)
-    }
-    
-    // MARK: - ListDetailCoordinator Tests
-    
-    // Test if coordinator starts without crashing
-    // forexample if I forget to assign ViewModel my app will crash
-    // Because it is only force unwrap
-    func testListDetailCoordinatorStart() {
-        let navigator = UINavigationController()
-        let coordinator = ListDetailCoordinator(navigator: navigator)
-        coordinator.start(with: PokemonItem.dummy)
-        
-        let vm = (navigator.topViewController as? ListDetailViewController)?.viewModel
-        XCTAssertNotNil(vm)
-    }
-    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
