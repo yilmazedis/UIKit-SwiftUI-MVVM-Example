@@ -45,6 +45,7 @@
 		01B5BEF02BA1F9A5007DC687 /* PokemonGuideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEEF2BA1F9A5007DC687 /* PokemonGuideUITests.swift */; };
 		01B5BEF22BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5BEF12BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift */; };
 		01F748B22BA8F06E00F04E00 /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F748B12BA8F06E00F04E00 /* PokemonDetailViewModel.swift */; };
+		AC346E772C1DF07700DC4154 /* PublicKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC346E762C1DF07700DC4154 /* PublicKeyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		01B5BEEF2BA1F9A5007DC687 /* PokemonGuideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGuideUITests.swift; sourceTree = "<group>"; };
 		01B5BEF12BA1F9A5007DC687 /* PokemonGuideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonGuideUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		01F748B12BA8F06E00F04E00 /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
+		AC346E762C1DF07700DC4154 /* PublicKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				01307F392BA2172D003E9A47 /* NetworkManager.swift */,
 				01307F442BA220E4003E9A47 /* WebImageLoader.swift */,
 				0193EB9B2BC4CA3500FAC11C /* DownloadError.swift */,
+				AC346E762C1DF07700DC4154 /* PublicKeyManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC346E772C1DF07700DC4154 /* PublicKeyManager.swift in Sources */,
 				01307F4F2BA2CE80003E9A47 /* ListDetailViewModel.swift in Sources */,
 				01307F452BA220E4003E9A47 /* WebImageLoader.swift in Sources */,
 				01307F7B2BA4306D003E9A47 /* PokemonListViewModel.swift in Sources */,

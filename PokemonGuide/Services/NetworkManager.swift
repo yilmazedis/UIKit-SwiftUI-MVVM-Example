@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CommonCrypto
 
 protocol NetworkManagerProtocol {
     func downloadWithCombine<T: Decodable>(task: HTTPTask) -> AnyPublisher<[T], Error>
@@ -15,11 +16,16 @@ protocol NetworkManagerProtocol {
 
 final class NetworkManager: NSObject, NetworkManagerProtocol {
     
-    private let requestBuilder: any RequestBuilder
+    private let requestBuilder: RequestBuilder
+    private let publicKeyManager: PublicKeyManagerProtocol
     private var session: URLSession!
     
-    init(requestBuilder: any RequestBuilder = URLRequestBuilder()) {
+    private let localPublicKey = "Ud9Oxx5y+qyQ29XYWk7CD1oZVZ50uqrMVeowBnkRW6s="
+    
+    init(requestBuilder: RequestBuilder = URLRequestBuilder(),
+         publicKeyManager: PublicKeyManagerProtocol = PublicKeyManager()) {
         self.requestBuilder = requestBuilder
+        self.publicKeyManager = publicKeyManager
         super.init()
     }
     
@@ -75,7 +81,32 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
 extension NetworkManager: URLSessionDelegate {
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+
+        //Create a server trust
+        guard let serverTrust = challenge.protectionSpace.serverTrust,
+              let certificate = SecTrustGetCertificateAtIndex(serverTrust, 0) else {
+            return
+        }
         
+        if let serverPublicKey = SecCertificateCopyKey(certificate),
+           let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil) {
+            
+            let data: Data = serverPublicKeyData as Data
+            
+            //comparing server and local hash keys
+            if publicKeyManager.verify(publicKey: data, with: localPublicKey) {
+                let credential: URLCredential = URLCredential(trust: serverTrust)
+                print("Public Key pinning is successfull")
+                completionHandler(.useCredential, credential)
+            } else {
+                print("Public Key pinning is failed")
+                completionHandler(.cancelAuthenticationChallenge, nil)
+            }
+        }
+        
+        
+        // Uncomment below for Certificate Pinning
+        /*
         // Create a server trust
         guard let serverTrust = challenge.protectionSpace.serverTrust else {
             Logger.log(.error, "Certification pinning create a server trust failed")
@@ -122,5 +153,6 @@ extension NetworkManager: URLSessionDelegate {
             Logger.log(.error, "Certification pinning is failed")
             completionHandler(.cancelAuthenticationChallenge, nil)
         }
+         */
     }
 }
