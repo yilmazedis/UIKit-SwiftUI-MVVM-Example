@@ -30,7 +30,7 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
     }
     
     private func handleResponse<T: Decodable>(data: Data?, response: URLResponse?) throws -> [T] {
-        invalidateSession()
+        invalidateSession() // This Line, if I remove there will be memory leak. you can check with memory graph
         guard let data = data,
               let response = response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300 else {
