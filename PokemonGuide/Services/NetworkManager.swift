@@ -18,7 +18,6 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
     
     private let requestBuilder: RequestBuilder
     private let publicKeyManager: PublicKeyManagerProtocol
-    private var session: URLSession!
     
     private let localPublicKey = "Ud9Oxx5y+qyQ29XYWk7CD1oZVZ50uqrMVeowBnkRW6s="
     
@@ -30,7 +29,6 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
     }
     
     private func handleResponse<T: Decodable>(data: Data?, response: URLResponse?) throws -> [T] {
-        invalidateSession() // This Line, if I remove there will be memory leak. you can check with memory graph
         guard let data = data,
               let response = response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300 else {
@@ -47,9 +45,10 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
                 .eraseToAnyPublisher()
         }
         
-        prepareSession()
+        let session = prepareSession()
         return session.dataTaskPublisher(for: request)
             .tryMap(handleResponse)
+            .handleEvents(receiveCompletion: { _ in session.invalidateAndCancel() })
             .eraseToAnyPublisher()
     }
     
@@ -58,25 +57,24 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
             throw DownloadError.failedToBuildRequest
         }
         
-        prepareSession()
+        let session = prepareSession()
         let (data, response) = try await session.data(for: request)
+        defer { session.invalidateAndCancel() }
         return try handleResponse(data: data, response: response)
-    }
-    
-    private func prepareSession() {
-        let delegateQueue = OperationQueue()
-        delegateQueue.qualityOfService = .userInteractive
-        self.session = URLSession(configuration: .ephemeral, delegate: self, delegateQueue: delegateQueue)
     }
     
     // The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session.
     // If you do not invalidate the session by calling the invalidateAndCancel() or finishTasksAndInvalidate() method,
     // your app leaks memory until it exits.
     // https://stackoverflow.com/a/49258644/7657265
-    private func invalidateSession() {
-        session.invalidateAndCancel()
+    private func prepareSession() -> URLSession {
+        let delegateQueue = OperationQueue()
+        delegateQueue.qualityOfService = .userInteractive
+        return URLSession(configuration: .ephemeral, delegate: self, delegateQueue: delegateQueue)
     }
 }
+
+// MARK: - URLSessionDelegate
 
 extension NetworkManager: URLSessionDelegate {
     
