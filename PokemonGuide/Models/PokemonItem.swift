@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct PokemonItem: Codable, Hashable {
+/****
+Make sure all model members are not nil and ready to present to view.
+I have URL itself rather then string. So I dont have to guard let URL always. Like DTO
+*/
+struct PokemonItem: Codable {
     let id: Int
     let name: String
     let description: String
@@ -33,15 +37,19 @@ struct PokemonItem: Codable, Hashable {
         self.imageUrl = imageUrl
     }
     
+    static var dummy: PokemonItem {
+        PokemonItem(id: 0, name: "", description: "", imageUrl: URL(string: AppScheme.current.rawValue)!)
+    }
+}
+
+// MARK: - Hashable
+
+extension PokemonItem: Hashable {
     static func ==(lhs: PokemonItem, rhs: PokemonItem) -> Bool {
         return lhs.id == rhs.id
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-    
-    static var dummy: PokemonItem {
-        PokemonItem(id: 0, name: "", description: "", imageUrl: URL(string: AppScheme.current.rawValue)!)
     }
 }
