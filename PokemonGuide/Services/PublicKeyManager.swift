@@ -9,10 +9,14 @@ import Foundation
 import CommonCrypto
 
 protocol PublicKeyManagerProtocol {
-    func verify(publicKey: Data, with localPublicKey: String) -> Bool
+    func verify(_ publicKey: Data) -> Bool
+    var localPublicKey: String { get }
 }
 
 final class PublicKeyManager: PublicKeyManagerProtocol {
+    
+    let localPublicKey = "Ud9Oxx5y+qyQ29XYWk7CD1oZVZ50uqrMVeowBnkRW6s="
+    
     private let rsa2048Asn1Header: [UInt8] = [
         0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
         0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
@@ -29,7 +33,7 @@ final class PublicKeyManager: PublicKeyManagerProtocol {
         return Data(hash).base64EncodedString()
     }
     
-    func verify(publicKey: Data, with localPublicKey: String) -> Bool {
+    func verify(_ publicKey: Data) -> Bool {
         let hashedPublicKey = hashPublicKey(publicKey: publicKey)
         return hashedPublicKey == localPublicKey
     }

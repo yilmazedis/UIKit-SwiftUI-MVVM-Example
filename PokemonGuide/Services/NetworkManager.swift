@@ -18,9 +18,7 @@ final class NetworkManager: NSObject, NetworkManagerProtocol {
     
     private let requestBuilder: RequestBuilder
     private let publicKeyManager: PublicKeyManagerProtocol
-    
-    private let localPublicKey = "Ud9Oxx5y+qyQ29XYWk7CD1oZVZ50uqrMVeowBnkRW6s="
-    
+        
     init(requestBuilder: RequestBuilder = URLRequestBuilder(),
          publicKeyManager: PublicKeyManagerProtocol = PublicKeyManager()) {
         self.requestBuilder = requestBuilder
@@ -92,7 +90,7 @@ extension NetworkManager: URLSessionDelegate {
             let data: Data = serverPublicKeyData as Data
             
             //comparing server and local hash keys
-            if publicKeyManager.verify(publicKey: data, with: localPublicKey) {
+            if publicKeyManager.verify(data) {
                 let credential: URLCredential = URLCredential(trust: serverTrust)
                 print("Public Key pinning is successfull")
                 completionHandler(.useCredential, credential)
