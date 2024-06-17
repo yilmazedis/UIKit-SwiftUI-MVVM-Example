@@ -78,28 +78,54 @@ extension NetworkManager: URLSessionDelegate {
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 
-        //Create a server trust
-        guard let serverTrust = challenge.protectionSpace.serverTrust,
-              let certificate = SecTrustGetCertificateAtIndex(serverTrust, 0) else {
+        // Create a server trust
+        guard let serverTrust = challenge.protectionSpace.serverTrust else {
+            print("Challenge did not contain server trust.")
+            completionHandler(.cancelAuthenticationChallenge, nil)
             return
         }
         
-        if let serverPublicKey = SecCertificateCopyKey(certificate),
-           let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil) {
-            
-            let data: Data = serverPublicKeyData as Data
-            
-            //comparing server and local hash keys
-            if publicKeyManager.verify(data) {
-                let credential: URLCredential = URLCredential(trust: serverTrust)
-                print("Public Key pinning is successfull")
-                completionHandler(.useCredential, credential)
-            } else {
-                print("Public Key pinning is failed")
+        
+        // Retrieve certificate chain
+        var certificate: SecCertificate?
+        
+        if #available(iOS 15.0, *) {
+            guard let certificateChain = SecTrustCopyCertificateChain(serverTrust) as? [SecCertificate],
+                  let firstCertificate = certificateChain.first else {
+                print("Failed to retrieve certificate chain.")
                 completionHandler(.cancelAuthenticationChallenge, nil)
+                return
             }
+            certificate = firstCertificate
+        } else {
+            certificate = SecTrustGetCertificateAtIndex(serverTrust, 0)
         }
         
+        guard let certificate = certificate else {
+            print("Failed to retrieve server certificate.")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+            return
+        }
+        
+        // Extract server public key
+        guard let serverPublicKey = SecCertificateCopyKey(certificate),
+              let serverPublicKeyData = SecKeyCopyExternalRepresentation(serverPublicKey, nil) else {
+            print("Failed to extract server public key.")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+            return
+        }
+        
+        let publicKeyData: Data = serverPublicKeyData as Data
+        
+        // Verify the server's public key against the local public key
+        if publicKeyManager.verify(publicKeyData) {
+            let credential: URLCredential = URLCredential(trust: serverTrust)
+            print("Public Key pinning is successful")
+            completionHandler(.useCredential, credential)
+        } else {
+            print("Public Key pinning failed: Server public key does not match expected key.")
+            completionHandler(.cancelAuthenticationChallenge, nil)
+        }
         
         // Uncomment below for Certificate Pinning
         /*
